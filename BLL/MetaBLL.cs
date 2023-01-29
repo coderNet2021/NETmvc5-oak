@@ -26,6 +26,12 @@ namespace BLL
 
         }
 
+        public void DeleteMeta(int ID)
+        {
+            dao.DeleteMeta(ID);
+            LogDAO.AddLog(General.ProcessType.MetaDelete, General.TableName.Meta, ID);
+        }
+
         public List<MetaDTO> GetMetaData()
         {
             List<MetaDTO> dtolist = new List<MetaDTO>();
