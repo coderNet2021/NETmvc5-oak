@@ -26,6 +26,13 @@ namespace BLL
 
         }
 
+        public string DeleteAds(int ID)
+        {
+            string imagepath = dao.DeleteAds(ID);
+            LogDAO.AddLog(General.ProcessType.AdsDelete, General.TableName.Ads, ID);
+            return imagepath;
+        }
+
         public List<AdsDTO> GetAds()
         {
             return dao.GetAds();

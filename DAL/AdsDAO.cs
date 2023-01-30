@@ -24,6 +24,26 @@ namespace DAL
             }
         }
 
+        public string DeleteAds(int ID)
+        {
+            try
+            {
+                Ad ads = db.Ads.First(x => x.ID == ID);
+                string imagepath = ads.ImagePath;
+                ads.isDeleted = true;
+                ads.DeletedDate = DateTime.Now;
+                ads.LastUpdateDate = DateTime.Now;
+                ads.LastUpdateUserID = UserStatic.UserID;
+                db.SaveChanges();
+                return imagepath;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public List<AdsDTO> GetAds()
         {
 

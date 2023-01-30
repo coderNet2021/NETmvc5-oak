@@ -128,5 +128,19 @@ namespace BLL
             dto.CommentCount = dao.getCommentCount();
             return dto;
         }
+
+        public string DeletePostImage(int ID)
+        {
+            string imagepath = dao.DeletePostImage(ID);
+            LogDAO.AddLog(General.ProcessType.ImageDelete, General.TableName.Image, ID);
+            return imagepath;
+        }
+
+        public List<PostImageDTO> DeletePost(int ID)
+        {
+            List<PostImageDTO> imagelist = dao.DeletePost(ID);
+            LogDAO.AddLog(General.ProcessType.PostDelete, General.TableName.post, ID);
+            return imagelist;
+        }
     }
 }

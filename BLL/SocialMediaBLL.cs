@@ -26,6 +26,12 @@ namespace BLL
             return true;
         }
 
+        public string DeleteSocialMedia(int ID)
+        {
+            string imagepath = dao.DeleteSocialMedia(ID);
+            LogDAO.AddLog(General.ProcessType.SocialDelete, General.TableName.social, ID);
+            return imagepath;
+        }
         public List<SocialMediaDTO> GetSocialMedias()
         {
             List<SocialMediaDTO> dtolist = new List<SocialMediaDTO>();

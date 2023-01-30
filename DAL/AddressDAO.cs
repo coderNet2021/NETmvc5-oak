@@ -24,6 +24,24 @@ namespace DAL
             }
         }
 
+        public void DeleteAddress(int ID)
+        {
+            try
+            {
+                Address ads = db.Addresses.First(x => x.ID == ID);
+                ads.isDeleted = true;
+                ads.DeletedDate = DateTime.Now;
+                ads.LastUpdateDate = DateTime.Now;
+                ads.LastUpdateUserID = UserStatic.UserID;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public List<AddressDTO> GetAddresses()
         {
             List<Address> list = db.Addresses.Where(x => x.isDeleted == false).OrderBy(x => x.AddDate).ToList();

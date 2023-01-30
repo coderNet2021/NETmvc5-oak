@@ -26,6 +26,12 @@ namespace BLL
             return true;
         }
 
+        public void DeleteVideo(int ID)
+        {
+            dao.DeleteVideo(ID);
+            LogDAO.AddLog(General.ProcessType.VideoDelete, General.TableName.Video, ID);
+        }
+
         public List<VideoDTO> GetVideos()
         {
             return dao.GetVideos();

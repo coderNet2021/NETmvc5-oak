@@ -97,5 +97,24 @@ namespace DAL
                 throw ex;
             }
         }
+
+        public string DeleteUser(int ID)
+        {
+            try
+            {
+                T_User user = db.T_User.First(x => x.ID == ID);
+                user.isDeleted = true;
+                user.DeletedDate = DateTime.Now;
+                user.LastUpdateDate = DateTime.Now;
+                user.LastUpdateUserID = UserStatic.UserID;
+                db.SaveChanges();
+                return user.ImagePath;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

@@ -155,5 +155,26 @@ namespace UI.Areas.Admin.Controllers
             return Json(dto, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult DeletePostImage(int ID)
+        {
+            string imagepath = bll.DeletePostImage(ID);
+            if (System.IO.File.Exists(Server.MapPath("~/Areas/Admin/Content/PostImage/" + imagepath)))
+            {
+                System.IO.File.Delete(Server.MapPath("~/Areas/Admin/Content/PostImage/" + imagepath));
+            }
+            return Json("");
+        }
+        public JsonResult DeletePost(int ID)
+        {
+            List<PostImageDTO> imagelist = bll.DeletePost(ID);
+            foreach (var item in imagelist)
+            {
+                if (System.IO.File.Exists(Server.MapPath("~/Areas/Admin/Content/PostImage/" + item.ImagePath)))
+                {
+                    System.IO.File.Delete(Server.MapPath("~/Areas/Admin/Content/PostImage/" + item.ImagePath));
+                }
+            }
+            return Json("");
+        }
     }
 }
